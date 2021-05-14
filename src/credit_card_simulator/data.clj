@@ -21,33 +21,34 @@
   purchases)
 
 (defn new-client [name cpf email]
-  (add-client! {
-                :uuid  (UUID/randomUUID)
-                :name  name
-                :cpf   cpf
-                :email email}))
+  (add-client!
+    {:uuid  (UUID/randomUUID)
+     :name  name
+     :cpf   cpf
+     :email email}))
 
 (defn new-credit-card [number cvv validity limit client-id]
-  (add-credit-card! {
-                     :uuid      (UUID/randomUUID)
-                     :number    number
-                     :cvv       cvv
-                     :validity  validity
-                     :limit     limit
-                     :client-id client-id}))
+  (add-credit-card!
+    {:uuid      (UUID/randomUUID)
+     :number    number
+     :cvv       cvv
+     :validity  validity
+     :limit     limit
+     :client-id client-id}))
 
 (defn new-purchase [date cost establishment category client-id credit-card-id]
-  (add-purchase! {
-                 :uuid           (UUID/randomUUID)
-                 :date           date
-                 :cost           cost
-                 :establishment  establishment
-                 :category       category
-                 :client-id      client-id
-                 :credit-card-id credit-card-id}))
+  (add-purchase!
+    {:uuid           (UUID/randomUUID)
+     :date           date
+     :cost           cost
+     :establishment  establishment
+     :category       category
+     :client-id      client-id
+     :credit-card-id credit-card-id}))
 
 
 (defn create-data []
+
   ;clients
   (def client1 (new-client "Fernanda Gonçalves da Silva" "243.172.270-88" "fernanda@teste.com"))
   (def client2 (new-client "Fernanda Gonçalves da Silva" "055.768.180-40" "maria@teste.com"))
@@ -75,7 +76,7 @@
   (new-purchase
     "11/05/2021" 350 "Saraiva" "books" (get client3 :uuid) (get credit-card3 :uuid)))
 
-(defn clear-datas []
+(defn clear-data []
   (def clients [])
   (def purchases [])
   (def credit-cards []))

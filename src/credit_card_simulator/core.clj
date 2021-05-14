@@ -2,11 +2,6 @@
   (:require  [credit-card-simulator.logic :as logic]
              [credit-card-simulator.data :as db]))
 
-;Representação dos dados do cliente (nome, cpf, email);
-;Representação dos dados do cartão (número, cvv, validade, limite);
-;Listagem de compras realizadas (data, valor, estabelecimento, categoria);
-;Valor dos gastos agrupados por categoria.
-
 (db/create-data)
 
 (println "All purchases:")
@@ -23,7 +18,7 @@
 (logic/search-purchases (db/get-purchases) 150)
 
 
-(db/clear-datas)
+(db/clear-data)
 
 
 
