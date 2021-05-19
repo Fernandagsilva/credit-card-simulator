@@ -10,22 +10,22 @@
 (defn delete-database []
   (d/delete-database db-uri))
 
-(def schema [{:db/ident       :client/id
+(def schema [{:db/ident       :customer/id
               :db/valueType   :db.type/uuid
               :db/cardinality :db.cardinality/one
               :db/doc         "Client id"
               }
-             {:db/ident       :client/name
+             {:db/ident       :customer/name
               :db/valueType   :db.type/string
               :db/cardinality :db.cardinality/one
               :db/doc         "Client name"
               }
-             {:db/ident       :client/cpf
+             {:db/ident       :customer/cpf
               :db/valueType   :db.type/string
               :db/cardinality :db.cardinality/one
               :db/doc         "Client cpf"
               }
-             {:db/ident        :client/email
+             {:db/ident        :customer/email
               :db/valueType    :db.type/string
               :db/cardinality  :db.cardinality/one
               :db/doc          "Client email"
@@ -36,7 +36,7 @@
               :db/doc          "Credit card id"
               }
              {:db/ident        :credit-card/number
-              :db/valueType    :db.type/long
+              :db/valueType    :db.type/string
               :db/cardinality  :db.cardinality/one
               :db/doc          "Credit card number"
               }
@@ -55,7 +55,7 @@
               :db/cardinality  :db.cardinality/one
               :db/doc          "Credit card limit"
               }
-             {:db/ident        :credit-card/client-id
+             {:db/ident        :credit-card/customer-id
               :db/valueType    :db.type/uuid
               :db/cardinality  :db.cardinality/one
               :db/doc          "Credit card client id"
@@ -85,7 +85,7 @@
               :db/cardinality  :db.cardinality/one
               :db/doc          "Transaction category"
               }
-             {:db/ident        :transaction/client-id
+             {:db/ident        :transaction/customer-id
               :db/valueType    :db.type/uuid
               :db/cardinality  :db.cardinality/one
               :db/doc          "Transaction client id"
@@ -99,4 +99,8 @@
 (defn create-schema [conn]
   (d/transact conn schema)
   )
+
+(defn find-all [db]
+  (d/q '[:find (pull ?entity [*])
+         :where [?entity :transaction/id]] db))
 
